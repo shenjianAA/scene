@@ -1,0 +1,57 @@
+{
+	"errCode": 100,
+	"errMsg": "请求成功",
+	"data": {
+		"eqNumber": "400000000003",
+		"timeScale": null,
+		"timeScaleStr": "2020-06-01 06:17:54",
+		"dataInsaneous": {
+			"id": 390,
+			"sceneName": "场景1",
+			"eleType": null,
+			"timeScale": null,
+			"timeScaleStr": "2020-05-30 10:42:36",
+			"createTime": null,
+			"eqId": "400000000003",
+			"zhYoZo": null,
+			"zhYoA": null,
+			"zhYoB": null,
+			"zhYoC": null,
+			"faYoZo": null,
+			"faYoA": null,
+			"faYoB": null,
+			"faYoC": null,
+			"zhWuZo": null,
+			"zhWuA": null,
+			"zhWuB": null,
+			"zhWuC": null,
+			"faWuZo": null,
+			"faWuA": null,
+			"faWuB": null,
+			"faWuC": null,
+			"powerFactorZo": null,
+			"powerFactorA": null,
+			"powerFactorB": null,
+			"powerFactorC": null,
+			"voltageA": "221V",
+			"voltageB": "222V",
+			"voltageC": "223V",
+			"electricityA": "1.1A",
+			"electricityB": "2.1A",
+			"electricityC": "3.1A",
+			"page": null
+		},
+		"dataIndication": null,
+		"eventDataList": [{
+			"eventName": "A相断相",
+			"startTime": "2020-05-30 10:42:36",
+			"endTime": null,
+			"voltageA": "0V"
+		}, {
+			"eventName": "停电",
+			"startTime": "2020-05-30 07:42:38",
+			"endTime": "2020-05-30 9:42:36",
+			"voltageA": null
+		}]
+	}
+}

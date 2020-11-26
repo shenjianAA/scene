@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="meter-list">
+			<div  :class="[selectIndex == 65 ? 'active' : '',meterList9.list[0] && meterList9.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList9.list[0] ? meterList9.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList9.list[0] && meterList9.list[0].isPowerOff"></power-warn></div>
+			<div  :class="[selectIndex == 66 ? 'active' : '',meterList9.list[1] && meterList9.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList9.list[1] ? meterList9.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList9.list[1] && meterList9.list[1].isPowerOff"></power-warn></div>
+			<div  :class="[selectIndex == 67 ? 'active' : '',meterList9.list[2] && meterList9.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList9.list[2] ? meterList9.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList9.list[2] && meterList9.list[2].isPowerOff"></power-warn></div>
+			<div  :class="[selectIndex == 68 ? 'active' : '',meterList9.list[3] && meterList9.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList9.list[3] ? meterList9.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList9.list[3] && meterList9.list[3].isPowerOff"></power-warn></div>
+		</div>
+		<div class="meter-list">
+			<div  :class="[selectIndex == 69 ? 'active' : '',meterList9.list[4] && meterList9.list[4].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,5)" :data-id="meterList9.list[4] ? meterList9.list[4]['eqId'] : '' "><div class="meter-item-num">5号</div><power-warn :ispower="meterList9.list[4] && meterList9.list[4].isPowerOff"></power-warn></div>
+			<div  :class="[selectIndex == 70 ? 'active' : '',meterList9.list[5] && meterList9.list[5].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,6)" :data-id="meterList9.list[5] ? meterList9.list[5]['eqId'] : '' "><div class="meter-item-num">6号</div><power-warn :ispower="meterList9.list[5] && meterList9.list[5].isPowerOff"></power-warn></div>
+			<div  :class="[selectIndex == 71 ? 'active' : '',meterList9.list[6] && meterList9.list[6].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,7)" :data-id="meterList9.list[6] ? meterList9.list[6]['eqId'] : '' "><div class="meter-item-num">7号</div><power-warn :ispower="meterList9.list[6] && meterList9.list[6].isPowerOff"></power-warn></div>
+			<div  :class="[selectIndex == 72 ? 'active' : '',meterList9.list[7] && meterList9.list[7].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,8)" :data-id="meterList9.list[7] ? meterList9.list[7]['eqId'] : '' "><div class="meter-item-num">8号</div><power-warn :ispower="meterList9.list[7] && meterList9.list[7].isPowerOff"></power-warn></div>
+		</div>
+	</body>
+</html>

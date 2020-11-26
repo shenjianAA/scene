@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能感知场景</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .btn1 {
+      position: absolute;
+      top: 150px;
+      left: 78px;
+      border-radius: 5px;
+      background: #0c75fa;
+      padding: 10px 21px;
+      color: #fff;
+      border: none;
+      font-size: 20px;
+    }
+    .btn2 {
+      position: absolute;
+      top: 150px;
+      left: 190px;
+      border-radius: 5px;
+      background: #0c75fa;
+      padding: 10px 21px;
+      color: #fff;
+      border: none;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <button class="btn1" @click="changeScene('场景1')">场景1</button>
+    <button class="btn2" @click="changeScene('场景2')">场景2</button>
+    <iframe :src="iframeSrc" frameborder="0" id="iframe" frameborder="0" width="3500" height="1200"></iframe>
+  </div>
+  <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        iframeSrc: "scene2.html"
+      },
+      methods: {
+        changeScene(name) {
+          if(name == "场景1") {
+            this.iframeSrc = "scene1.html";
+          }else {
+            this.iframeSrc = "scene2.html"
+          }
+        }
+      },
+    })
+  </script>
+</body>
+</html>

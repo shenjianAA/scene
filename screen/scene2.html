@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>智能感知场景2</title>
+		<link rel="stylesheet" href="css/zngzScene.css" />
+		<style>
+			#branch-switch {
+				left: 320px;
+			}
+			#pds-switch {
+				left: 320px;
+			}
+			#bx7_switch {
+				left: 40%;
+			}
+			#bx8_switch, #bx9_switch {
+				top: 27%;
+			}
+			.section-air {
+				margin-top: 70px;
+				margin-left: 2px;
+			}
+			.section-air .air {
+				text-align: center;
+			}
+			.section-air .section-three {
+				margin: 20px auto;
+			}
+			.transformer {
+				left: 285px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container" class="scene2" v-cloak>
+			<!-- 电表箱拓扑图部分	-->
+			<div id="wrapper-left">
+				<!--电表箱左侧部分-->
+				<div class="sidebar left-sidebar">
+					<!--左侧第一行-->
+					<div class="section-right">
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 1 ? 'active' : '' ">
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div id="meter1_01" :class="[selectIndex == 1 ? 'active' : '',meterList1.list[0] && meterList1.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱1" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList1.list[0] ? meterList1.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList1.list[0] && meterList1.list[0].isPowerOff"></power-warn></div>
+									<div id="meter1_02" :class="[selectIndex == 2 ? 'active' : '',meterList1.list[1] && meterList1.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱1" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList1.list[1] ? meterList1.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList1.list[1] && meterList1.list[1].isPowerOff"></power-warn></div>
+									<div id="meter1_03" :class="[selectIndex == 3 ? 'active' : '',meterList1.list[2] && meterList1.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱1" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList1.list[2] ? meterList1.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList1.list[2] && meterList1.list[2].isPowerOff"></power-warn></div>
+									<div id="meter1_04" :class="[selectIndex == 4 ? 'active' : '',meterList1.list[3] && meterList1.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱1" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList1.list[3] ? meterList1.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList1.list[3] && meterList1.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+							<div class="switch-right" >
+								<div @mouseenter="switchEnter($event,'1',meterList1.switchItem['eqId'])" @mouseleave="switchLeave($event,'1',meterList1.switchItem['eqId'])">
+									<img id="bx1_switch" class="switch switch-img-rt" 
+										:src="meterList1.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off_bottom.png' : 'images/zngzScene/switch_rt.png'"/>
+									<div :class="switchBox1" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList1.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList1.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList1.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList1.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList1.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList1.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList1.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList1.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList1.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name left-name">{{meterList1.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList1.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+						</div>
+					</div>
+					<!--左侧第二行-->
+					<div class="section" style="margin-left: 155px;">
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 2 ? 'active' : '' ">
+							<div class="switch-left"  >
+								<div @mouseenter="switchEnter($event,'2',meterList2.switchItem['eqId'])" @mouseleave="switchLeave($event,'2',meterList2.switchItem['eqId'])">
+									<img id="bx2_switch" class="switch switch-img-lf" 
+										:src="meterList2.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox2" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList2.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList2.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList2.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList2.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList2.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList2.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList2.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList2.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList2.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList2.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList2.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 5 ? 'active' : '',meterList2.list[0] && meterList2.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱2" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList2.list[0] ? meterList2.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList2.list[0] && meterList2.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 6 ? 'active' : '',meterList2.list[1] && meterList2.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱2" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList2.list[1] ? meterList2.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList2.list[1] && meterList2.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 7 ? 'active' : '',meterList2.list[2] && meterList2.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱2" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList2.list[2] ? meterList2.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList2.list[2] && meterList2.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 8 ? 'active' : '',meterList2.list[3] && meterList2.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱2" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList2.list[3] ? meterList2.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList2.list[3] && meterList2.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 3 ? 'active' : '' ">
+							<div class="switch-left"  >
+								<div @mouseenter="switchEnter($event,'3',meterList3.switchItem['eqId'])" @mouseleave="switchLeave($event,'3',meterList3.switchItem['eqId'])">
+									<img id="bx3_switch" class="switch switch-img-lf" 
+										:src="meterList3.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox3" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList3.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList3.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList3.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList3.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList3.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList3.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList3.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList3.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList3.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList3.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList3.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 9 ? 'active' : '',meterList3.list[0] && meterList3.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱3" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList3.list[0] ? meterList3.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList3.list[0] && meterList3.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 10 ? 'active' : '',meterList3.list[1] && meterList3.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱3" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList3.list[1] ? meterList3.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList3.list[1] && meterList3.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 11 ? 'active' : '',meterList3.list[2] && meterList3.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱3" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList3.list[2] ? meterList3.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList3.list[2] && meterList3.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 12 ? 'active' : '',meterList3.list[3] && meterList3.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱3" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList3.list[3] ? meterList3.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList3.list[3] && meterList3.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--左侧第三行-->
+					<div class="section section-last" style="margin-left: 155px;">
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 4 ? 'active' : '' ">
+							<div class="switch-left">
+								<div @mouseenter="switchEnter($event,'4',meterList4.switchItem['eqId'])" @mouseleave="switchLeave($event,'4',meterList4.switchItem['eqId'])">
+									<img id="bx4_switch" class="switch switch-img-lf" 
+										:src="meterList4.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox4" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList4.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList4.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList4.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList4.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList4.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList4.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList4.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList4.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList4.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList4.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList4.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 13 ? 'active' : '',meterList4.list[0] && meterList4.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱4" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList4.list[0] ? meterList4.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList4.list[0] && meterList4.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 14 ? 'active' : '',meterList4.list[1] && meterList4.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱4" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList4.list[1] ? meterList4.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList4.list[1] && meterList4.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 15 ? 'active' : '',meterList4.list[2] && meterList4.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱4" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList4.list[2] ? meterList4.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList4.list[2] && meterList4.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 16 ? 'active' : '',meterList4.list[3] && meterList4.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱4" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList4.list[3] ? meterList4.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList4.list[3] && meterList4.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 5 ? 'active' : '' ">
+							<div class="switch-left">
+								<div @mouseenter="switchEnter($event,'5',meterList5.switchItem['eqId'])" @mouseleave="switchLeave($event,'5',meterList5.switchItem['eqId'])">
+									<img id="bx5_switch" class="switch switch-img-lf" 
+										:src="meterList5.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox5" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList5.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList5.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList5.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList5.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList5.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList5.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList5.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList5.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList5.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList5.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList5.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 17 ? 'active' : '',meterList5.list[0] && meterList5.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱5" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList5.list[0] ? meterList5.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList5.list[0] && meterList5.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 18 ? 'active' : '',meterList5.list[1] && meterList5.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱5" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList5.list[1] ? meterList5.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList5.list[1] && meterList5.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 19 ? 'active' : '',meterList5.list[2] && meterList5.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱5" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList5.list[2] ? meterList5.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList5.list[2] && meterList5.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 20 ? 'active' : '',meterList5.list[3] && meterList5.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱5" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList5.list[3] ? meterList5.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList5.list[3] && meterList5.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--电表箱中间部分-->
+				<div class="main">
+					<!--低压配电室-->
+					<div id="switch-room">
+							<img class="transformer" src="images/zngzScene/transformer.png" alt="" />
+							<div id="pds-switch" class="switch-left"  @mouseenter="pdsSwitchEnter($event,pdsSwitch['eqId'],'pdsSwitch')" @mouseleave="pds_showBox = false">
+								<img :src="pdsSwitch['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+								<span class="switch-name pds-switch-name">{{pdsSwitch['eqName']}}</span>
+								<div class="switch-content">
+									<div>A相电压：<span>{{pdsSwitch.detail.volA | emptyFilter}}</span></div>
+									<div>B相电压：<span>{{pdsSwitch.detail.volB | emptyFilter}}</span></div>
+									<div>C相电压：<span>{{pdsSwitch.detail.volC | emptyFilter}}</span></div>
+									<div>A相电流：<span>{{pdsSwitch.detail.eleA | emptyFilter}}</span></div>
+									<div>B相电流：<span>{{pdsSwitch.detail.eleB | emptyFilter}}</span></div>
+									<div>C相电流：<span>{{pdsSwitch.detail.eleC | emptyFilter}}</span></div>
+								</div>
+								<div :class="pds_showBox" class="switch-box arrow-box right">
+									<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{pdsSwitch["eqName"]}}</span>
+											<span class="time">{{pdsSwitch.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{pdsSwitch.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{pdsSwitch.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{pdsSwitch.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{pdsSwitch.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{pdsSwitch.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{pdsSwitch.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in pdsSwitch.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<!--开关详情结束-->
+								</div>
+							</div>
+					</div>
+					<!--低压分支箱-->
+					<div id="branch-box">
+						<!-- 分支箱总开关暂无详情    @mouseenter="fzx_showBox = 'show';" @mouseleave="fzx_showBox = false"-->
+						<div id="branch-switch" class="switch-left">
+							<img  :src="switchBr['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'" />
+							<span class="switch-name pds-switch-name">{{switchBr['eqName']}}</span>
+							<div :class="fzx_showBox" class="switch-box arrow-box right">
+								<!-- 开关详情 -->
+									<div class="switch-title">
+										<span>{{switchBr["eqName"]}}</span>
+										<span class="time">{{switchBr.detail.dataTime}}</span>
+									</div>
+									<div class="switch-info">
+										<div>
+											<div class="title">A相电压</div>
+											<div class="voltage content">{{switchBr.detail.volA | emptyFilter}}</div>
+										</div>
+										<div>
+											<div class="title">B相电压</div>
+											<div class="voltage content">{{switchBr.detail.volB | emptyFilter}}</div>
+										</div>
+										<div>
+											<div class="title">C相电压</div>
+											<div class="voltage content">{{switchBr.detail.volC | emptyFilter}}</div>
+										</div>
+									</div>
+									<div class="switch-info">
+										<div>
+											<div class="title">A相电流</div>
+											<div class="current content">{{switchBr.detail.eleA | emptyFilter}}</div>
+										</div>
+										<div>
+											<div class="title">B相电流</div>
+											<div class="current content">{{switchBr.detail.eleB | emptyFilter}}</div>
+										</div>
+										<div>
+											<div class="title">C相电流</div>
+											<div class="current content">{{switchBr.detail.eleC | emptyFilter}}</div>
+										</div>
+									</div>
+									<div class="event">
+										<div class="title">事件</div>
+										<div class="event-list">
+											<div class="event-item line clearfix" v-for="item in switchBr.detail.event">
+												<div class="event-name"><div>{{item.eventName}}</div></div>
+												<div class="stop-time">
+													<div>
+														<div>上报时间</div>
+														<div>{{item.startTime | emptyFilter}}</div>
+													</div>
+												</div>
+												<div class="start-time">
+													<div>
+														<div>恢复时间</div>
+														<div>{{item.endTime | emptyFilter}}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								<!--开关详情结束-->
+							</div>
+						</div>
+						<div class="switch-list">
+							<div class="switch-left" @mouseenter="fzxSwitchEnter($event,switchBr1['eqId'],'switchBr1','1')" @mouseleave="fzx_showBox1 = false">
+								<img id="branch-switch-sub1" class="switch-list-img" :src="switchBr1['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+								<span class="switch-name left-name switch-list-span">{{switchBr1['eqName']}}</span>
+								<div :class="fzx_showBox1" class="switch-list-box arrow-box right">
+									<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{switchBr1["eqName"]}}</span>
+											<span class="time">{{switchBr1.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{switchBr1.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{switchBr1.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{switchBr1.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{switchBr1.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{switchBr1.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{switchBr1.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in switchBr1.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<!--开关详情结束-->
+								</div>
+							</div>
+							<div class="switch-left" @mouseenter="fzxSwitchEnter($event,switchBr2['eqId'],'switchBr2','2')" @mouseleave="fzx_showBox2 = false">
+								<img id="branch-switch-sub2" class="switch-list-img" :src="switchBr2['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+								<span class="switch-name left-name switch-list-span">{{switchBr2['eqName']}}</span>
+								<div :class="fzx_showBox2" class="switch-list-box arrow-box right">
+									<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{switchBr2["eqName"]}}</span>
+											<span class="time">{{switchBr2.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{switchBr2.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{switchBr2.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{switchBr2.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{switchBr2.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{switchBr2.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{switchBr2.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in switchBr2.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<!--开关详情结束-->
+								</div>
+							</div>
+							<div class="switch-left" @mouseenter="fzxSwitchEnter($event,switchBr3['eqId'],'switchBr3','3')" @mouseleave="fzx_showBox3 = false">
+								<img id="branch-switch-sub3" class="switch-list-img" :src="switchBr3['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+								<span class="switch-name left-name switch-list-span">{{switchBr3['eqName']}}</span>
+								<div :class="fzx_showBox3" class="switch-list-box arrow-box right">
+									<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{switchBr3["eqName"]}}</span>
+											<span class="time">{{switchBr3.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{switchBr3.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{switchBr3.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{switchBr3.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{switchBr3.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{switchBr3.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{switchBr3.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in switchBr3.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<!--开关详情结束-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--中间第三行-->
+					<div class="section section-main">
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 6 ? 'active' : '' ">
+							<div class="switch-left">
+								<div @mouseenter="switchEnter($event,'6',meterList6.switchItem['eqId'])" @mouseleave="switchLeave($event,'6',meterList6.switchItem['eqId'])">
+									<img id="bx6_switch" class="switch switch-img-lf" 
+										:src="meterList6.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox6" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList6.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList6.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList6.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList6.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList6.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList6.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList6.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList6.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList6.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList6.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList6.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 21 ? 'active' : '',meterList6.list[0] && meterList6.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱6" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList6.list[0] ? meterList6.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList6.list[0] && meterList6.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 22 ? 'active' : '',meterList6.list[1] && meterList6.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱6" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList6.list[1] ? meterList6.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList6.list[1] && meterList6.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 23 ? 'active' : '',meterList6.list[2] && meterList6.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱6" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList6.list[2] ? meterList6.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList6.list[2] && meterList6.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 24 ? 'active' : '',meterList6.list[3] && meterList6.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱6" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList6.list[3] ? meterList6.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList6.list[3] && meterList6.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 7 ? 'active' : '' ">
+							<div class="switch-left">
+								<div @mouseenter="switchEnter($event,'7',meterList7.switchItem['eqId'])" @mouseleave="switchLeave($event,'7',meterList7.switchItem['eqId'])">
+									<img id="bx7_switch" class="switch switch-img-lf" 
+										:src="meterList7.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox7" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList7.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList7.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList7.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList7.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList7.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList7.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList7.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList7.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList7.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList7.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList7.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 25 ? 'active' : '',meterList7.list[0] && meterList7.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱7" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList7.list[0] ? meterList7.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList7.list[0] && meterList7.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 26 ? 'active' : '',meterList7.list[1] && meterList7.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱7" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList7.list[1] ? meterList7.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList7.list[1] && meterList7.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 27 ? 'active' : '',meterList7.list[2] && meterList7.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱7" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList7.list[2] ? meterList7.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList7.list[2] && meterList7.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 28 ? 'active' : '',meterList7.list[3] && meterList7.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱7" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList7.list[3] ? meterList7.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList7.list[3] && meterList7.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--电表箱右侧部分-->
+				<div class="sidebar right-sidebar">
+					<!--右侧第三行-->
+					<div class="section section-last" style="top:865px;">
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 8 ? 'active' : '' ">
+							<div class="switch-left">
+								<div @mouseenter="switchEnter($event,'8',meterList8.switchItem['eqId'])" @mouseleave="switchLeave($event,'8',meterList8.switchItem['eqId'])">
+									<img id="bx8_switch" class="switch switch-img-lf" 
+										:src="meterList8.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox8" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList8.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList8.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList8.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList8.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList8.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList8.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList8.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList8.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList8.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList8.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList8.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 29 ? 'active' : '',meterList8.list[0] && meterList8.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱8" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList8.list[0] ? meterList8.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList8.list[0] && meterList8.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 30 ? 'active' : '',meterList8.list[1] && meterList8.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱8" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList8.list[1] ? meterList8.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList8.list[1] && meterList8.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 31 ? 'active' : '',meterList8.list[2] && meterList8.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱8" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList8.list[2] ? meterList8.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList8.list[2] && meterList8.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 32 ? 'active' : '',meterList8.list[3] && meterList8.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱8" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList8.list[3] ? meterList8.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList8.list[3] && meterList8.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+						<div class="meter-box" :class="Math.ceil(selectIndex/4) == 9 ? 'active' : '' ">
+							<div class="switch-left">
+								<div @mouseenter="switchEnter($event,'9',meterList9.switchItem['eqId'])" @mouseleave="switchLeave($event,'9',meterList9.switchItem['eqId'])">
+									<img id="bx9_switch" class="switch switch-img-lf" 
+										:src="meterList9.switchItem['openStatus'] =='0' ? 'images/zngzScene/switch_off.png' : 'images/zngzScene/switch_lf.png'"/>
+									<div :class="switchBox9" class="switch-box switch-box-left arrow-box right">
+										<!-- 开关详情 -->
+										<div class="switch-title">
+											<span>{{meterList9.switchItem["eqName"]}}</span>
+											<span class="time">{{meterList9.detail.dataTime}}</span>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电压</div>
+												<div class="voltage content">{{meterList9.detail.volA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电压</div>
+												<div class="voltage content">{{meterList9.detail.volB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电压</div>
+												<div class="voltage content">{{meterList9.detail.volC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="switch-info">
+											<div>
+												<div class="title">A相电流</div>
+												<div class="current content">{{meterList9.detail.eleA | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">B相电流</div>
+												<div class="current content">{{meterList9.detail.eleB | emptyFilter}}</div>
+											</div>
+											<div>
+												<div class="title">C相电流</div>
+												<div class="current content">{{meterList9.detail.eleC | emptyFilter}}</div>
+											</div>
+										</div>
+										<div class="event">
+											<div class="title">事件</div>
+											<div class="event-list">
+												<div class="event-item line clearfix" v-for="item in meterList9.detail.event">
+													<div class="event-name"><div>{{item.eventName}}</div></div>
+													<div class="stop-time">
+														<div>
+															<div>上报时间</div>
+															<div>{{item.startTime | emptyFilter}}</div>
+														</div>
+													</div>
+													<div class="start-time">
+														<div>
+															<div>恢复时间</div>
+															<div>{{item.endTime | emptyFilter}}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<span class="switch-name right-name">{{meterList9.switchItem["eqName"]}}</span>
+								<span class="switch-name left-name left-p">P：<span>{{meterList9.switchItem["zhYoZo"] | emptyFilter}}</span></span>
+							</div>
+							<div class="meter-box-wrapper">
+								<div class="meter-list">
+									<div  :class="[selectIndex == 33 ? 'active' : '',meterList9.list[0] && meterList9.list[0].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,1)" :data-id="meterList9.list[0] ? meterList9.list[0]['eqId'] : '' "><div class="meter-item-num">1号</div><power-warn :ispower="meterList9.list[0] && meterList9.list[0].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 34 ? 'active' : '',meterList9.list[1] && meterList9.list[1].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,2)" :data-id="meterList9.list[1] ? meterList9.list[1]['eqId'] : '' "><div class="meter-item-num">2号</div><power-warn :ispower="meterList9.list[1] && meterList9.list[1].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 35 ? 'active' : '',meterList9.list[2] && meterList9.list[2].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,3)" :data-id="meterList9.list[2] ? meterList9.list[2]['eqId'] : '' "><div class="meter-item-num">3号</div><power-warn :ispower="meterList9.list[2] && meterList9.list[2].isPowerOff"></power-warn></div>
+									<div  :class="[selectIndex == 36 ? 'active' : '',meterList9.list[3] && meterList9.list[3].eachOtherType == '3' ? 'meter-item3' : 'meter-item']" data-box="表箱9" data-target="#electricity-modal"  @click="meterClick($event,4)" :data-id="meterList9.list[3] ? meterList9.list[3]['eqId'] : '' "><div class="meter-item-num">4号</div><power-warn :ispower="meterList9.list[3] && meterList9.list[3].isPowerOff"></power-warn></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 电表箱详情展示页-->
+			<div id="wrapper-right">
+				<div id="meter-modal">
+				    	<div class="title">
+				    		<span class="t1">{{meterDetail.title1}}</span>
+				    		<span class="t2">{{meterDetail.title2}}</span>
+				    	</div>
+				    	<div id="chart-title">
+				    		<div class="bg-line"></div>
+				    		<div class="title">
+				    			<span>功率曲线</span>
+				    		</div>
+				    	</div>
+				    	<div id="electric-chart"></div>
+				    	<div id="detailInfo">
+				    		<div class="section-one">
+				    			<div  id="meter-lg" class="meter-lg-box">
+				    				<img src="images/zngzScene/meter_lg.jpg" alt="" />
+				    			</div>
+				    			<div class="section-one-right">
+				    				<div class="line line-one">
+				    					<div class="text-center">
+				    						<div>示数(kwh)</div>
+				    						<div class="text">{{meterDetail.elec | emptyFilter}}</div>
+				    					</div>
+				    					<div class="text-center">
+				    						<span class="split-line"></span>
+				    					</div>
+				    					<div class="text-center">
+				    						<div>功率(kw)</div>
+				    						<div class="text">{{meterDetail.num | emptyFilter}}</div>
+				    					</div>
+				    				</div>
+				    				<div class="line line-two">
+				    					<div>
+				    						<div class="title">A相电流</div>
+				    						<div><span class="val">{{meterDetail.currentA | emptyFilter}}</span></div>
+				    					</div>
+				    					<div>
+				    						<div class="title">B相电流</div>
+				    						<div><span class="val">{{meterDetail.currentB | emptyFilter}}</span></div>
+				    					</div>
+				    					<div>
+				    						<div class="title">C相电流</div>
+				    						<div><span class="val">{{meterDetail.currentC | emptyFilter}}</span></div>
+				    					</div>
+				    				</div>
+				    				<div class="line line-three">
+				    					<div>
+				    						<div class="title">A相电压</div>
+				    						<div><span class="val">{{meterDetail.voltageA | emptyFilter}}</span></div>
+				    					</div>
+				    					<div>
+				    						<div class="title">B相电压</div>
+				    						<div><span class="val">{{meterDetail.voltageB | emptyFilter}}</span></div>
+				    					</div>
+				    					<div>
+				    						<div class="title">C相电压</div>
+				    						<div><span class="val">{{meterDetail.voltageC | emptyFilter}}</span></div>
+				    					</div>
+				    				</div>
+				    			</div>
+				    		</div>
+				    		<div class="section-air">
+				    			<div class="air">
+				    				<img id="airCondition" src="images/zngzScene/airConditioner.png" alt="" :data-id="meterDetail.conditioner['eqId']"/>
+				    			</div>
+									<div class="section-three">空调用电信息数据</div>
+				    		</div>
+				    		
+				    	</div>
+				    </div>
+			</div>
+		</div>
+		<div id="chart"></div>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="common/js/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/scene2_line.js"></script>
+		<script type="text/javascript" src="js/scene2.js"></script>
+		
+	</body>
+</html>

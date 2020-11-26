@@ -1,0 +1,351 @@
+{
+	"pubEquipmentPackList": [
+		{//变压器
+			"eqId": "100000000001",
+			"parentEqId": "",
+			"eqFrom": "能量设备",
+			"eqType": "变压器",
+			"eqName": "变压器",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": ""
+		},
+		{//低压配电总开关
+			"eqId": "200000000001",
+			"parentEqId": "100000000001",
+			"eqFrom": "能量设备",
+			"eqName": "K401",
+			"eqType": "开关",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": ""
+		},
+		{//低压分支开关1
+			"eqId": "300000000001",
+			"parentEqId": "200000000001",
+			"eqFrom": "能量设备",
+			"eqName": "K401",
+			"eqType": "开关",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "配电柜1"
+		},
+		{//低压分支开关2
+			"eqId": "300000000002",
+			"parentEqId": "200000000001",
+			"eqFrom": "能量设备",
+			"eqType": "开关",
+			"eqName": "K421",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "配电柜1"
+		},
+		{//低压分支开关3
+			"eqId": "300000000003",
+			"parentEqId": "200000000001",
+			"eqFrom": "能量设备",
+			"eqName": "K422",
+			"eqType": "开关",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "配电柜1"
+		},
+		{//低压分支开关4
+			"eqId": "300000000004",
+			"parentEqId": "200000000001",
+			"eqFrom": "能量设备",
+			"eqName": "K423",
+			"eqType": "开关",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "配电柜1"
+		},
+		{//低压分支开关5
+			"eqId": "300000000005",
+			"parentEqId": "200000000001",
+			"eqFrom": "能量设备",
+			"eqType": "开关",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "配电柜1"
+		},
+		{//表箱开关1
+			"eqId": "400000000001",
+			"parentEqId": "300000000002",
+			"eqFrom": "能量设备",
+			"eqType": "开关",
+			"eqName": "K431",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "表箱1"
+		},
+		{//表箱开关2
+			"eqId": "400000000002",
+			"parentEqId": "300000000002",
+			"eqFrom": "能量设备",
+			"eqType": "开关",
+			"eqName": "K432",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "表箱2"
+		},
+		{//表箱开关3
+			"eqId": "400000000003",
+			"parentEqId": "300000000002",
+			"eqFrom": "能量设备",
+			"eqType": "开关",
+			"eqName": "K433",
+			"eqModel": "",
+			"isCollect": "0",
+			"eachOther": "三相",
+			"openStatus": "0",
+			"electrificationStatus": "1",
+			"attachedEquipment": "表箱3"
+		},
+		{//负荷辨识电表1
+			"eqId": "500000000001",
+			"parentEqId": "400000000001",
+			"eqFrom": "计量设备",
+			"eqType": "负荷辨识电表",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "A相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "表箱1"
+		},
+		{"eqId": "500000000002","parentEqId": "400000000001","eqFrom": "计量设备","eqType": "负荷辨识电表","eqModel": "","isCollect": "是","eachOther": "A相","openStatus": "","electrificationStatus": "1","attachedEquipment": "表箱1"},
+		{"eqId": "500000000003","parentEqId": "400000000001","eqFrom": "计量设备","eqType": "负荷辨识电表","eqModel": "","isCollect": "是","eachOther": "A相","openStatus": "","electrificationStatus": "1","attachedEquipment": "表箱1"},
+		{"eqId": "500000000004","parentEqId": "400000000001","eqFrom": "计量设备","eqType": "负荷辨识电表","eqModel": "","isCollect": "是","eachOther": "A相","openStatus": "","electrificationStatus": "1","attachedEquipment": "表箱1"},
+		{"eqId": "500000000005","parentEqId": "400000000001","eqFrom": "计量设备","eqType": "负荷辨识电表","eqModel": "","isCollect": "是","eachOther": "A相","openStatus": "","electrificationStatus": "1","attachedEquipment": "表箱1"},
+		{"eqId": "500000000006","parentEqId": "400000000001","eqFrom": "计量设备","eqType": "负荷辨识电表","eqModel": "","isCollect": "是","eachOther": "A相","openStatus": "","electrificationStatus": "1","attachedEquipment": "表箱1"},
+		{"eqId": "500000000007","parentEqId": "400000000001","eqFrom": "计量设备","eqType": "负荷辨识电表","eqModel": "","isCollect": "是","eachOther": "A相","openStatus": "","electrificationStatus": "1","attachedEquipment": "表箱1"},
+		{"eqId": "500000000008","parentEqId": "400000000001","eqFrom": "计量设备","eqType": "负荷辨识电表","eqModel": "","isCollect": "是","eachOther": "A相","openStatus": "","electrificationStatus": "1","attachedEquipment": "表箱1"},
+		{//负荷辨识电表96
+			"eqId": "500000000096",
+			"parentEqId": "400000000012",
+			"eqFrom": "计量设备",
+			"eqType": "负荷辨识电表",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "A相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "表箱12"
+		},
+		{//空调1
+			"eqId": "600000000001",
+			"parentEqId": "500000000001",
+			"eqFrom": "能量设备",
+			"eqType": "空调",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "A相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "用户1"
+		},
+		{//空调96
+			"eqId": "600000000096",
+			"parentEqId": "500000000096",
+			"eqFrom": "能量设备",
+			"eqType": "空调",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "C相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "用户96"
+		},
+		{//洗衣机1
+			"eqId": "610000000001",
+			"parentEqId": "500000000001",
+			"eqFrom": "能量设备",
+			"eqType": "洗衣机",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "A相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "用户1"
+		},
+		{//洗衣机96
+			"eqId": "610000000096",
+			"parentEqId": "500000000096",
+			"eqFrom": "能量设备",
+			"eqType": "洗衣机",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "C相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "用户96"
+		},
+		{//热水器1
+			"eqId": "620000000001",
+			"parentEqId": "500000000001",
+			"eqFrom": "能量设备",
+			"eqType": "热水器",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "A相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "用户1"
+		},
+		{//热水器96
+			"eqId": "620000000096",
+			"parentEqId": "500000000096",
+			"eqFrom": "能量设备",
+			"eqType": "热水器",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "C相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "用户96"
+		},
+
+		{//分支监测终端1
+			"eqId": "910000000001",
+			"parentEqId": "300000000002",
+			"eqFrom": "采集设备",
+			"eqType": "分支监测终端",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "三相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "配电柜1"
+		},
+		{//分支监测终端4
+			"eqId": "910000000004",
+			"parentEqId": "300000000005",
+			"eqFrom": "采集设备",
+			"eqType": "分支监测终端",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "三相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "配电柜1"
+		},
+		{//分支监测终端1
+			"eqId": "910000000005",
+			"parentEqId": "400000000001",
+			"eqFrom": "采集设备",
+			"eqType": "分支监测终端",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "三相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "表箱1"
+		},
+		{//分支监测终端16
+			"eqId": "910000000016",
+			"parentEqId": "400000000012",
+			"eqFrom": "采集设备",
+			"eqType": "分支监测终端",
+			"eqModel": "",
+			"isCollect": "是",
+			"eachOther": "三相",
+			"openStatus": "",
+			"electrificationStatus": "1",
+			"attachedEquipment": "表箱12"
+		}
+	],
+	"eqDataInfo":[
+		{
+			"eqId": "400000000001","times": "1575772540000",
+			"instantaneousEata": [{
+				"electricCurrent": { "proA": "1A", "proB": "2A","proC": "3A"},
+				"voltage": { "proA": "220V","proB": "221V", "proC": "222V" }
+			}],
+			"indicationData": [{
+				"forwardDirection": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt","eeiJ": "1345.57kwt","eeiP": "1345.57kwt", "eeiZ": "1345.57kwt" },
+				"reverse": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt", "eeiJ": "1345.57kwt","eeiP": "1345.57kwt","eeiZ": "1345.57kwt"}
+			}],
+			"电量数据": {"正向有功电能示值": "120","反向有功电能示值":  ""},
+			"设备信息": {"容量": "","互感器变化": ""},
+			"eventsData": [
+				{"msg": "停复电","dataA": "停电时间&&2020-01-13 14:22:34","dataB": "复电时间&&2020-01-13 15:30:21"}
+			]
+		},
+		{
+			"eqId": "500000000001","times": "1574475640000",
+			"instantaneousEata": [{
+				"electricCurrent": { "proA": "21A", "proB": "22A","proC": "23A"},
+				"voltage": { "proA": "220V","proB": "221V", "proC": "222V" }
+			}],
+			"indicationData": [{
+				"forwardDirection": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt","eeiJ": "1345.57kwt","eeiP": "1345.57kwt", "eeiZ": "1345.57kwt" },
+				"reverse": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt", "eeiJ": "1345.57kwt","eeiP": "1345.57kwt","eeiZ": "1345.57kwt"}
+			}],
+			"电量数据": {"正向有功电能示值": "120","反向有功电能示值":  ""},
+			"设备信息": {"容量": "","互感器变化": ""},
+			"eventsData": [
+				{"msg": "停复电","dataA": "停电时间&&2020-01-13 14:22:34","dataB": "复电时间&&2020-01-13 15:30:21"}
+			]
+		},
+		{
+			"eqId": "500000000002","times": "1574476540000",
+			"instantaneousEata": [{
+				"electricCurrent": { "proA": "31A", "proB": "32A","proC": "33A"},
+				"voltage": { "proA": "220V","proB": "221V", "proC": "222V" }
+			}],
+			"indicationData": [{
+				"forwardDirection": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt","eeiJ": "1345.57kwt","eeiP": "1345.57kwt", "eeiZ": "1345.57kwt" },
+				"reverse": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt", "eeiJ": "1345.57kwt","eeiP": "1345.57kwt","eeiZ": "1345.57kwt"}
+			}],
+			"电量数据": {"正向有功电能示值": "220","反向有功电能示值":  ""},
+			"设备信息": {"容量": "","互感器变化": ""},
+			"eventsData": [
+				{"msg": "停复电","dataA": "停电时间&&2020-01-13 14:22:34","dataB": "复电时间&&2020-01-13 15:30:21"}
+			]
+		},
+		{
+			"eqId": "500000000003","时标": "1575686140000",
+			"instantaneousEata": [{
+				"electricCurrent": { "proA": "41A", "proB": "42A","proC": "43A"},
+				"voltage": { "proA": "220V","proB": "221V", "proC": "222V" }
+			}],
+			"indicationData": [{
+				"forwardDirection": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt","eeiJ": "1345.57kwt","eeiP": "1345.57kwt", "eeiZ": "1345.57kwt" },
+				"reverse": {"eeiF": "1345.57kwt","eeiG": "1345.57kwt", "eeiJ": "1345.57kwt","eeiP": "1345.57kwt","eeiZ": "1345.57kwt"}
+			}],
+			"电量数据": {"正向有功电能示值": "320","反向有功电能示值":  ""},
+			"设备信息": {"容量": "","互感器变化": ""},
+			"eventsData": [
+				{"msg": "停复电","dataA": "停电时间&&2020-01-13 14:22:34","dataB": "复电时间&&2020-01-13 15:30:21"}
+			]
+		}
+	]
+};
